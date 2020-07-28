@@ -20,7 +20,7 @@ The program achieves the following:
 ###### SW3:
 - Displays sample of 5x7 and 8x12 font
 - Turns on both leds
-  - Pressing the buttom multiple times will cycle both leds on or off
+  - Pressing the button multiple times will cycle both leds on or off
 
 ###### SW4:
 - Plays song using buzzer
