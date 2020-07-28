@@ -12,11 +12,14 @@ void drawTriangle() {
   clearScreen(COLOR_WHITE);
   __delay_cycles(5000000);
   clearScreen(COLOR_BLACK);
-
+  int x = 10;
+  int y = 85;
   for (j = 0; j < 50; j++) {
     for (i = 62; i < 115; i++) {
-      drawPixel(i, i-30 + redraw, COLOR_BLUE);
-      drawPixel(62-(k++), i-30 + redraw, COLOR_BLUE);
+      drawPixel(i, i-30 + redraw, COLOR_WHITE);
+      drawPixel(62-(k++), i-30 + redraw, COLOR_WHITE);
+      for(x = 10; x < 115; x++)
+	drawPixel(x, y+redraw, COLOR_WHITE);
     }
     __delay_cycles(1000000);
     clearScreen(COLOR_BLACK);
