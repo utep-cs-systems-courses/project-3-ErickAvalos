@@ -23,25 +23,40 @@ void led_update()
   switch_state_changed = 0;
 }
 
-/* void toggle_on() */
-/* { */
-/*   P1OUT = LED_RED; */
-/*   __delay_cycles(500000); */
-/*   P1OUT = LED_GREEN; */
-/*   __delay_cycles(500000); */
-/* } */
+void off() {
+  if (red_on) {
+    P1OUT |= LED_RED;
+    P1OUT |= LED_GREEN;
+  }
+  else {
+    P1OUT &= !LED_RED;
+    P1OUT &= !LED_GREEN;
+  }
+  toggle_red();
+}
 
-/* void toggle_off() */
-/* { */
-/*   P1OUT = !(LED_GREEN); */
-/*   __delay_cycles(500000); */
-/*   P1OUT = !LED_RED; */
-/*   __delay_cycles(500000); */
+// written in assembly.s //
+
+/* char toggle_red() { */
+/*   static char states = 0; */
+/*   switch (states) { */
+/*   case 0: */
+/*     red_on = 1; */
+/*     green_on = 1;
+/*     states = 1; */
+/*     break; */
+/*   case 1: */
+/*     red_on = 0; */
+/*     green_on = 0; */
+/*     states = 0; */
+/*     break; */
+/*   } */
+/*   return 1; */
 /* } */
 
 void led_dim()
 {
-  for (int i = 0; i < 1000; i++) {
+  for (int i = 0; i < 200; i++) {
     P1OUT = LED_RED;
     __delay_cycles(100000);
     P1OUT = LED_GREEN;

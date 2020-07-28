@@ -1,1 +1,1 @@
-void drawTriforce();
+void drawTriangle();

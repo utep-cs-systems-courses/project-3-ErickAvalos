@@ -4,39 +4,34 @@
 #include <lcddraw.h>
 #include "triforce.h"
 
-void drawTriforce() {
-  int i;
-  int j = 0;
-  for (i = 62; i < 82; i++) {
-    drawPixel(i, i-30, COLOR_WHITE);
-  }
-  for (i = 62; i < 82; i++) {
-    drawPixel(i-(j*2), i-30, COLOR_WHITE);
-    j++;
-  }
-  for (i = 42; i < 82; i++) {
-    drawPixel(i, 52, COLOR_WHITE);
-  }
-  j = 0;
-  for (i = 82; i < 102; i++) {
-    drawPixel(i, i-30, COLOR_WHITE);
-  }
-  for (i = 82; i < 102; i++) {
-    drawPixel(i-(j*2), i-30, COLOR_WHITE);
-    j++;
-  }
-  for (i = 62; i < 102; i++) {
-    drawPixel(i, 72, COLOR_WHITE);
-  }
-  j = 0;
-  for (i = 42; i < 62; i++) {
-    drawPixel(i, i+10, COLOR_WHITE);
-  }
-  for (i = 42; i < 62; i++) {
-    drawPixel(i-(j*2), i+10, COLOR_WHITE);
-    j++;
-  }
-  for (i = 22; i < 62; i++) {
-    drawPixel(i, 72, COLOR_WHITE);
+static int up, down = 0;
+
+void drawTriangle() {
+  int i, j;
+  int k = 0, redraw = 0;
+  clearScreen(COLOR_WHITE);
+  __delay_cycles(5000000);
+  clearScreen(COLOR_BLACK);
+
+  for (j = 0; j < 50; j++) {
+    for (i = 62; i < 115; i++) {
+      drawPixel(i, i-30 + redraw, COLOR_BLUE);
+      drawPixel(62-(k++), i-30 + redraw, COLOR_BLUE);
+    }
+    __delay_cycles(1000000);
+    clearScreen(COLOR_BLACK);
+
+    if (redraw > 70) {
+	up = 1;
+	down = 0;
+      } else if (redraw < -10) {
+	up = 0;
+	down = 1;
+      }
+
+      if (down)
+	redraw += 5;
+      else redraw -= 5;
+      k = 0;
   }
 }

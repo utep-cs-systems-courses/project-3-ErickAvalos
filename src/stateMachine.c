@@ -7,71 +7,37 @@
 #include "switches.h"
 #include "buzzer.h"
 #include "triforce.h"
-//#include "lcdutils.h"
-//#include "lcddraw.h"
+
+int redrawScreen = 1;
 
 void stateMachine(int state)
 {
-  int col = 0;
-  int dummy = col;
-
-  clearScreen(COLOR_GREEN);
-
-  //int state = 0;
-  //while (1) {
-    /* if ((P2IN & BIT0) == 1) */
-    /*   state = 1; */
-    /* else if ((P2IN & BIT1) == 0) */
-    /*   state = 2; */
-    /* else if ((P2IN & BIT2) == 0) */
-    /*   state = 3; */
-    /* else if ((P2IN & BIT3) == 0) */
-    /*   state = 4; */
-    /* else */
-    /*   state = 0; */
-    
-    switch (state) {
-    case 1:
-      led_dim();
-      state = 0;
-      break;
-    case 2:
-      clearScreen(COLOR_BLACK);
-      drawTriforce();
-      binary_count();
-      state = 0;
-      break;
-    case 3:
-      led_alternate();
-      state = 0;
-      break;
-    case 4:
-      play_song();
-      state = 0;
-      break;
-    default:
-      break;
-    }
-    //}
-
-  /* switch (state) { */
-  /* case 1: */
-  /*   led_dim(); */
-  /*   state = 0; */
-  /*   break; */
-  /* case 2: */
-  /*   binary_count(); */
-  /*   state = 0; */
-  /*   break; */
-  /* case 3: */
-  /*   led_alternate(); */
-  /*   state = 0; */
-  /*   break; */
-  /* case 4: */
-  /*   play_song(); */
-  /*   state = 0; */
-  /*   break; */
-  /* default: */
-  /*   break; */
-  /* } */ 
+  clearScreen(COLOR_BLACK);
+  switch (state) {
+  case 1:
+    redrawScreen = 1;
+    state = 0;
+    break;
+  case 2:
+    clearScreen(COLOR_BLACK);
+    drawTriangle();
+    binary_count();
+    state = 0;
+    break;
+  case 3:
+    clearScreen(COLOR_BLACK);
+    drawString5x7(40, 60, "5x7 FONT", COLOR_WHITE, COLOR_BLUE);
+    drawString8x12(25, 75, "8x12 FONT", COLOR_WHITE, COLOR_BLUE);
+    off();
+    state = 0;
+    break;
+  case 4:
+    play_song();
+    led_alternate();
+    led_dim();
+    state = 0;
+    break;
+  default:
+    break;
+  } 
 }

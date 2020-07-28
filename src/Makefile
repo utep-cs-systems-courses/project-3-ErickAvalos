@@ -10,7 +10,7 @@ AR		= msp430-elf-ar
 
 all: states.elf
 
-states.elf: ${COMMON_OBJECTS} stateMachine.o switches.o led.o buzzer.o triforce.o p2_interrupt_handler.o main.o ../lib/libTimer.a
+states.elf: ${COMMON_OBJECTS} stateMachine.o assembly.o switches.o led.o buzzer.o triforce.o p2_interrupt_handler.o main.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lLcd -lp2sw -lTimer
 
 load: states.elf

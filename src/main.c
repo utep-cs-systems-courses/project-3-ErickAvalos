@@ -10,17 +10,27 @@
 #include "triforce.h"
 
 void main(void) 
-{  
+{
+  P1DIR |= LED_GREEN;
+  P1OUT |= LED_GREEN;
+  
   configureClocks();
   lcd_init();
   u_char width = screenWidth, height = screenHeight;
-  clearScreen(COLOR_BLUE);
-  //p2sw_init(15);
   switch_init();
   led_init();
   buzzer_init();
-
-  //enableWDTInterrupts();
+  clearScreen(COLOR_BLUE);
 
   or_sr(0x18);  // CPU off, GIE on
-} 
+
+  while (1) {
+    while (!redrawScreen) {
+      P1OUT &= ~LED_RED;
+      or_sr(0x18);
+    }
+    P1OUT |= LED_RED;
+    __delay_cycles(30000);
+    redrawScreen = 0;
+  }
+}

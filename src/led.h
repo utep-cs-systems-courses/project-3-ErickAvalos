@@ -7,9 +7,12 @@
 #define LEDS (BIT0 | BIT6)
 
 extern unsigned char led_changed;
+extern int redrawScreen;
 
 void led_init();
 void led_update();
+void off();
+char toggle_red();
 void toggle_on();
 void toggle_off();
 void led_dim();
