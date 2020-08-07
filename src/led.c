@@ -24,12 +24,12 @@ void led_update()
 }
 
 void off() {
-  if (red_on) {
-    P1OUT |= LED_RED;
+  if (green_on) {
+    //P1OUT |= LED_RED;
     P1OUT |= LED_GREEN;
   }
   else {
-    P1OUT &= !LED_RED;
+    //P1OUT &= !LED_RED;
     P1OUT &= !LED_GREEN;
   }
   toggle_red();
@@ -57,11 +57,11 @@ void off() {
 void led_dim()
 {
   for (int i = 0; i < 200; i++) {
-    P1OUT = LED_RED;
+    //P1OUT = LED_RED;
     __delay_cycles(100000);
     P1OUT = LED_GREEN;
     __delay_cycles(100000);
-    P1OUT = !LED_RED;
+    //P1OUT = !LED_RED;
     __delay_cycles(100000);
     P1OUT = !LED_GREEN;
     __delay_cycles(100000);
@@ -91,11 +91,11 @@ void led_alternate()
   for (int i = 0; i < 20; i++) {
     P1OUT = LED_GREEN;
     __delay_cycles(500000);
-    P1OUT = !LED_RED;
+    //P1OUT = !LED_RED;
     __delay_cycles(2500000);
     P1OUT = !LED_GREEN;
     __delay_cycles(500000);
-    P1OUT = LED_RED;
+    //P1OUT = LED_RED;
     __delay_cycles(2500000);
   }
 }
